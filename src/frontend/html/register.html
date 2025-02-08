@@ -3,21 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enregistrement d'un compte interne</title>
-    <script src="register.js" defer></script> <!-- Lien vers le script de validation JavaScript -->
+    <title>Créer un compte interne</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px 30px;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #333333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 14px;
+            color: #555555;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        button {
+            width: 100%;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #errorMessage {
+            color: red;
+            font-size: 14px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-    <h1>Créer un compte interne</h1>
-    <form id="registerForm" action="register.php" method="POST">
-        <label for="username">Nom d'utilisateur:</label>
-        <input type="text" id="username" name="username" required><br><br>
+    <div class="container">
+        <h1>Créer un compte</h1>
+        <form id="registerForm" action="register.php" method="POST">
+            <label for="username">Nom d'utilisateur :</label>
+            <input type="text" id="username" name="username" placeholder="Entrez votre nom d'utilisateur" required>
 
-        <label for="password">Mot de passe:</label>
-        <input type="password" id="password" name="password" required><br><br>
+            <label for="password">Mot de passe :</label>
+            <input type="password" id="password" name="password" placeholder="Entrez un mot de passe sécurisé" required>
 
-        <button type="submit">S'inscrire</button>
-    </form>
-
-    <p id="errorMessage" style="color: red;"></p> <!-- Pour afficher les erreurs côté client -->
+            <button type="submit">S'inscrire</button>
+        </form>
+        <p id="errorMessage"></p>
+    </div>
 </body>
 </html>
