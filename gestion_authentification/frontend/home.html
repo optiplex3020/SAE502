@@ -1,0 +1,17 @@
+<?php include '../backend/check_session.php'; ?>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page d'Accueil</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="form-container">
+        <h1>Bienvenue sur la Page d'Accueil interne <?php echo htmlspecialchars($_SESSION['username']); ?> !</h1>
+        <p>Vous êtes connecté avec succès !</p>
+        <a href="/backend/logout.php" class="logout-button">Se déconnecter</a>
+    </div>
+</body>
+</html>
