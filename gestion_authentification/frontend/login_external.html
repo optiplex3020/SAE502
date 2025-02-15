@@ -3,20 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enregistrement Utilisateur Externe</title>
+    <title>Connexion Utilisateur Externe</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div class="form-container">
-        <h1>Inscription Utilisateur Externe</h1>
-        <form id="registerExternalForm" action="/backend/register_external.php" method="POST">
+        <h1>Connexion Utilisateur Externe</h1>
+        <form id="loginExternalForm" action="/backend/login_external.php" method="POST">
             <input type="text" id="username" name="username" placeholder="Nom d'utilisateur" required>
-            <input type="email" id="email" name="email" placeholder="Email" required>
             <input type="password" id="password" name="password" placeholder="Mot de passe" required>
-            <button type="submit">S'inscrire</button>
+            <button type="submit">Se connecter</button>
         </form>
         <div id="message" class="message"></div>
-        <p class="message">Déjà un compte ? <a href="login_external.html">Connectez-vous</a></p>
+        <p class="message">Vous n'avez pas de compte? <a href="register_external.html">Inscrivez-vous</a></p>
     </div>
     <script src="js/script.js"></script>
 </body>

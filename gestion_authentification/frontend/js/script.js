@@ -47,3 +47,60 @@ document.addEventListener('DOMContentLoaded', function () {
         handleFormSubmission(loginForm, '/backend/login.php', '/home.html');
     }
 });
+document.addEventListener('DOMContentLoaded', function () {
+    const registerForm = document.getElementById('registerExternalForm');
+    if (registerForm) {
+        registerForm.addEventListener('submit', function (event) {
+            event.preventDefault(); // Empêche la soumission classique du formulaire
+
+            const formData = new FormData(registerForm);
+
+            fetch('/backend/register_external.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Réponse serveur :", data);
+                alert(data.message);
+                if (data.status === 'success') {
+                    setTimeout(() => {
+                        window.location.href = "/login.html";
+                    }, 2000);
+                }
+            })
+            .catch(error => {
+                console.error('Erreur lors de l’inscription :', error);
+            });
+        });
+    }
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    const loginExternalForm = document.getElementById('loginExternalForm');
+    if (loginExternalForm) {
+        loginExternalForm.addEventListener('submit', function (event) {
+            event.preventDefault(); // Empêche la soumission classique du formulaire
+
+            const formData = new FormData(loginExternalForm);
+
+            fetch('/backend/login_external.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Réponse serveur :", data);
+                alert(data.message);
+                if (data.status === 'success') {
+                    setTimeout(() => {
+                        window.location.href = "/home.html";
+                    }, 2000);
+                }
+            })
+            .catch(error => {
+                console.error('Erreur lors de la connexion :', error);
+            });
+        });
+    }
+});

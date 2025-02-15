@@ -31,13 +31,23 @@ ldap_set_option($ldap_conn, LDAP_OPT_PROTOCOL_VERSION, 3);
 ldap_bind($ldap_conn, $ldap_admin, $ldap_password);
 
 $dn = "uid=$username,ou=users,$ldap_dn";
+// Génération d'un UID unique
+$uidNumber = rand(10000, 99999);  // ID unique pour chaque utilisateur LDAP
+$gidNumber = "1000";  // Groupe par défaut
+$homeDirectory = "/home/$username";
+$loginShell = "/bin/bash";
+
 $entry = [
     "uid" => $username,
     "cn" => $username,
     "sn" => "Utilisateur",
     "mail" => $email,
     "objectClass" => ["inetOrgPerson", "posixAccount", "shadowAccount"],
-    "userPassword" => $hashed_password
+    "userPassword" => $hashed_password,
+    "uidNumber" => $uidNumber,
+    "gidNumber" => $gidNumber,
+    "homeDirectory" => $homeDirectory,
+    "loginShell" => $loginShell
 ];
 
 if (ldap_add($ldap_conn, $dn, $entry)) {
@@ -53,6 +63,14 @@ $message = "Bonjour $username,\n\nVotre compte a bien été créé.\nMerci de vo
 $headers = "From: noreply@mycompany.com";
 
 mail($to, $subject, $message, $headers);
+
+if (!ldap_add($ldap_conn, $dn, $entry)) {
+    $error = ldap_error($ldap_conn);
+    error_log("Erreur LDAP lors de l'inscription : " . $error);
+    echo json_encode(["status" => "error", "message" => "Erreur lors de l'ajout à LDAP : " . $error]);
+} else {
+    echo json_encode(["status" => "success", "message" => "Inscription réussie. Vérifiez votre e-mail."]);
+}
 
 ldap_close($ldap_conn);
 ?>

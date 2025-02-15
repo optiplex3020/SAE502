@@ -1,7 +1,8 @@
-/* Style général */
+/* Style global */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #e0f7fa; /* Fond bleu clair */
+    text-align: center;
+    background-color: #e3f2fd; /* Bleu clair */
     margin: 0;
     padding: 0;
     display: flex;
@@ -17,40 +18,53 @@ body {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 350px;
+    max-width: 400px;
     text-align: center;
 }
 
-/* Titre du formulaire */
+/* Titre */
 .form-container h1 {
     font-size: 1.5rem;
     color: #00796b; /* Vert foncé */
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 /* Champs de formulaire */
 .form-container input[type="text"],
+.form-container input[type="email"],
 .form-container input[type="password"] {
     width: 100%;
-    padding: 0.75rem;
-    margin-bottom: 1rem;
-    border: 1px solid #b2dfdb; /* Bordure vert clair */
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #b2dfdb; /* Bordure verte */
     border-radius: 5px;
     font-size: 1rem;
-    color: #004d40; /* Texte vert foncé */
+    display: block;
+    box-sizing: border-box;
 }
 
-.form-container input[type="text"]:focus,
-.form-container input[type="password"]:focus {
-    border-color: #00796b; /* Bordure vert foncé au focus */
+/* Fixer l'input email */
+.form-container input[type="email"] {
+    background-color: #ffffff;
+    color: #333;
+}
+
+/* Placeholder */
+.form-container input::placeholder {
+    color: #888;
+}
+
+/* Focus sur les inputs */
+.form-container input:focus {
+    border-color: #00796b;
     outline: none;
 }
 
-/* Bouton de formulaire */
+/* Bouton */
 .form-container button {
     width: 100%;
-    padding: 0.75rem;
-    background-color: #00796b; /* Vert foncé */
+    padding: 12px;
+    background-color: #00796b; /* Vert */
     color: #ffffff;
     border: none;
     border-radius: 5px;
@@ -60,25 +74,14 @@ body {
 }
 
 .form-container button:hover {
-    background-color: #004d40; /* Vert plus foncé au survol */
-}
-
-/* Liens supplémentaires */
-.form-container a {
-    color: #00796b; /* Vert foncé */
-    text-decoration: none;
-    font-size: 0.9rem;
-}
-
-.form-container a:hover {
-    text-decoration: underline;
+    background-color: #004d40; /* Vert foncé */
 }
 
 /* Message d'erreur ou de succès */
 .message {
-    margin-top: 1rem;
+    margin-top: 10px;
     font-size: 0.9rem;
-    color: #004d40; /* Vert foncé */
+    color: #004d40;
 }
 
 .message.success {
@@ -89,23 +92,13 @@ body {
     color: #dc3545;
 }
 
-/* Style pour la page d'accueil */
-.form-container h1 {
-    color: #00796b; /* Vert foncé */
-    margin-bottom: 1rem;
-}
-
-.logout-button {
-    display: inline-block;
-    margin-top: 1rem;
-    padding: 0.75rem 1.5rem;
-    background-color: #dc3545; /* Rouge pour le bouton de déconnexion */
-    color: #ffffff;
+/* Lien sous le formulaire */
+.form-container a {
+    color: #00796b;
     text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
+    font-size: 0.9rem;
 }
 
-.logout-button:hover {
-    background-color: #c82333; /* Rouge plus foncé au survol */
+.form-container a:hover {
+    text-decoration: underline;
 }
