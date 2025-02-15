@@ -1,4 +1,5 @@
 version: '3.8'
+
 services:
   db:
     image: mysql:5.7
@@ -11,7 +12,7 @@ services:
     volumes:
       - ./database:/docker-entrypoint-initdb.d
 
-  web:
+  php_apache:
     image: php:7.4-apache
     container_name: php_apache
     ports:
@@ -22,4 +23,26 @@ services:
     depends_on:
       - db
     command: >
-      bash -c "docker-php-ext-install mysqli && apache2-foreground"
+      bash -c "apt-get update && apt-get install -y libldap2-dev && docker-php-ext-configure ldap --with-ldap=/usr && docker-php-ext-install ldap && apache2-foreground"
+
+  ldap:
+    image: osixia/openldap:1.5.0
+    container_name: ldap_server
+    environment:
+      LDAP_ORGANISATION: "MyCompany"
+      LDAP_DOMAIN: "mycompany.com"
+      LDAP_ADMIN_PASSWORD: "admin"
+    ports:
+      - "389:389"
+      - "636:636"
+    volumes:
+      - ./ldap:/var/lib/ldap
+      - ./ldap_config:/etc/ldap/slapd.d
+
+  phpldapadmin:
+    image: osixia/phpldapadmin:0.9.0
+    container_name: ldap_admin
+    environment:
+      PHPLDAPADMIN_LDAP_HOSTS: ldap_server
+    ports:
+      - "6443:443"
