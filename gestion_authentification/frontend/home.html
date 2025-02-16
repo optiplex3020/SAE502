@@ -1,17 +1,89 @@
-<?php include '../backend/check_session.php'; ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page d'Accueil</title>
+    <title>AuthCorp - Tableau de bord</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
+<script src="js/keycloak.js"></script>
+<script>
+    keycloak.init({ onLoad: 'login-required' }).then(authenticated => {
+        if (authenticated) {
+            console.log("Keycloak token complet :", keycloak);
+            console.log("Token décodé :", keycloak.tokenParsed); 
+
+            document.getElementById("username").innerText = keycloak.tokenParsed?.preferred_username || "Non disponible";
+            document.getElementById("email").innerText = keycloak.tokenParsed?.email || "Non disponible";
+            document.getElementById("roles").innerText = keycloak.tokenParsed?.realm_access?.roles.join(", ") || "Aucun rôle";
+
+            document.getElementById("jwtToken").value = keycloak.token;
+        } else {
+            keycloak.login();
+        }
+    }).catch(error => {
+        console.error("Erreur Keycloak :", error);
+    });
+</script>
+
 <body>
-    <div class="form-container">
-        <h1>Bienvenue sur la Page d'Accueil interne <?php echo htmlspecialchars($_SESSION['username']); ?> !</h1>
-        <p>Vous êtes connecté avec succès !</p>
-        <a href="/backend/logout.php" class="logout-button">Se déconnecter</a>
-    </div>
+    <header>
+        <h1>Bienvenue sur votre espace sécurisé</h1>
+    </header>
+    <main>
+        <p id="roleMessage"></p>
+        <script>
+            keycloak.init({ onLoad: 'login-required' }).then(authenticated => {
+                if (authenticated) {
+                    const roles = keycloak.tokenParsed.realm_access.roles;
+                    if (roles.includes("admin")) {
+                        document.getElementById("roleMessage").innerText = "Bienvenue, Administrateur !";
+                    } else {
+                        document.getElementById("roleMessage").innerText = "Bienvenue, Utilisateur standard.";
+                    }
+                }
+            });
+        </script>
+        <h2>Informations de l'utilisateur</h2>
+        <p>Nom d'utilisateur : <span id="username"></span></p>
+        <p>Email : <span id="email"></span></p>
+        <p>Rôles : <span id="roles"></span></p>
+        <p>Votre Token JWT :</p>
+        <textarea id="jwtToken" rows="5" cols="50" readonly></textarea>
+        <button onclick="copyToken()">Copier</button>
+
+        <script>
+            function copyToken() {
+                navigator.clipboard.writeText(keycloak.token);
+                alert("Token copié !");
+            }
+
+            keycloak.init({ onLoad: 'login-required' }).then(authenticated => {
+                if (authenticated) {
+                    document.getElementById("jwtToken").value = keycloak.token;
+                }
+            });
+        </script>
+        <h2>🔒 Informations protégées</h2>
+        <button onclick="getProtectedData()">Récupérer les données</button>
+        <pre id="apiResponse"></pre>
+        
+        <script>
+            function getProtectedData() {
+                fetch("/backend/api/protected.php", {
+                    method: "GET",
+                    headers: {
+                        "Authorization": "Bearer " + keycloak.token
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("apiResponse").textContent = JSON.stringify(data, null, 2);
+                })
+                .catch(error => console.error("Erreur API :", error));
+            }
+        </script>
+        <a href="/backend/logout.php" class="btn">Déconnexion</a>
+    </main>
 </body>
 </html>

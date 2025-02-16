@@ -9,6 +9,30 @@ L'objectif de ce sprint était d'ajouter **l'inscription et l'authentification d
 
 ---
 
+## 🎯 Sprint 3 - Intégration Keycloak (SSO, JWT, Rôles)
+### ✅ Objectifs :
+- Intégration de Keycloak pour l’authentification des utilisateurs externes.
+- Gestion des rôles (`admin`, `user`).
+- Sécurisation des requêtes avec JWT (JSON Web Token).
+
+### 🔧 **Configuration Keycloak**
+1. Création du **Realm** : `WebApp`
+2. Ajout du **Client** : `webapp-client` (OpenID Connect)
+3. Définition des **Redirect URIs** :
+   - `http://localhost:8080/*`
+   - `http://localhost:8080/home.html`
+4. Ajout des **Rôles et Utilisateurs** :
+   - `test_user` → `user`
+   - `admin_user` → `admin`
+
+### 📌 **Améliorations**
+- 📋 **Affichage des infos Keycloak après connexion**
+- 🔒 **Gestion des rôles (admin / user)**
+- 🔑 **Affichage et copie du Token JWT**
+
+---
+✅ **Sprint 3 terminé avec succès !** 🚀🔥
+
 ## 🛠 **Technologies utilisées**
 - **Frontend :** HTML, CSS, JavaScript
 - **Backend :** PHP (Apache)

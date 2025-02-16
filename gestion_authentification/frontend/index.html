@@ -3,32 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accueil - Gestion de l'Authentification</title>
-    <link rel="stylesheet" href="css/style2.css">
+    <title>AuthCorp - Portail d'authentification</title>
+    <link rel="stylesheet" href="css/style_index.css">
 </head>
 <body>
     <header>
-        <h1>Bienvenue sur la plateforme d'authentification</h1>
-        <p>Veuillez choisir une action :</p>
+        <h1>🔐 AuthCorp - Portail de Connexion Sécurisée</h1>
+        <p>Accédez à votre espace en toute sécurité.</p>
     </header>
 
     <main>
-        <div class="button-container">
-            <a href="login.html" class="btn">Connexion (Utilisateur Interne)</a>
-            <a href="register.html" class="btn">Inscription (Utilisateur Interne)</a>
-            <a href="register_external.html" class="btn">Inscription (Utilisateur Externe)</a>
-            <a href="login_external.html" class="btn">Connexion (Utilisateur Externe)</a>
+        <div class="container">
+            <div class="card">
+                <h2>👔 Connexion Employé</h2>
+                <p>Accédez à votre compte interne AuthCorp.</p>
+                <a href="login.html" class="btn">Connexion Employé</a>
+            </div>
+            <div class="card">
+                <h2>🌍 Connexion Externe</h2>
+                <p>Accédez à votre compte en tant que partenaire.</p>
+                <a href="login_external.html" class="btn">Connexion Partenaire</a>
+            </div>
         </div>
     </main>
 
     <footer>
-        <p>&copy; 2024 Gestion de l'authentification - Tous droits réservés.</p>
+        <p>© 2024 AuthCorp - Sécurisation et gestion des accès.</p>
     </footer>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            console.log("Page d'accueil chargée !");
-        });
-    </script>
 </body>
 </html>
