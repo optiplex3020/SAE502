@@ -104,3 +104,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+const registerExternalForm = document.getElementById('registerExternalForm');
+if (registerExternalForm) {
+    handleFormSubmission(registerExternalForm, '/backend/register_external.php', '/login.html');
+}

@@ -1,3 +1,5 @@
+import Keycloak from "https://cdn.jsdelivr.net/npm/keycloak-js";
+console.log("🔹 Chargement de Keycloak.js...");
 const keycloak = new Keycloak({
     url: "http://localhost:8083",
     realm: "WebApp",
@@ -26,6 +28,14 @@ function getToken() {
 // Fonction de déconnexion
 function logout() {
     keycloak.logout();
+}
+
+console.log("🔹 Vérification de Keycloak :", typeof keycloak);
+
+if (typeof Keycloak === "undefined") {
+    console.error("❌ Keycloak n'est pas défini ! Vérifiez l'importation de la bibliothèque.");
+} else {
+    console.log("✅ Keycloak est correctement chargé !");
 }
 
 // Rafraîchir le Token d'accès toutes les 60 secondes
